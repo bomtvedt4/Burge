@@ -40,7 +40,7 @@ def jobs():#this function pulls in all of the jobs that match prepayment status
         ORDER BY OCNHDRPF.CONTRL DESC
 """
     #iniatiate our connection and run our query code from above
-    conn = pyodbc.connect("DSN=QDSN_AS400.PP.COM",uid='bomtved',password='bomtved')
+    conn = pyodbc.connect(REDACTED)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     cursor = cursor.execute(query)
@@ -65,7 +65,7 @@ def arEmail(account,index):#this function pulls in AR contact emails
         WHERE ACCTCNTPF.USEDFOR = 'AR'
             AND ACCTCNTPF.ACCTNBR = """+str(account)
     #iniatiate our connection and run our query code from above
-    conn = pyodbc.connect("DSN=QDSN_AS400.PP.COM",uid='bomtved',password='bomtved')
+    conn = pyodbc.connect(REDACTED)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     cursor = cursor.execute(query)
@@ -84,7 +84,7 @@ def ordEmail(control,index):
 
         WHERE ORDCNTPF.ORDERNBR = """+str(control)
     #iniatiate our connection and run our query code from above
-    conn = pyodbc.connect("DSN=QDSN_AS400.PP.COM",uid='bomtved',password='bomtved')
+    conn = pyodbc.connect(REDACTED)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     cursor = cursor.execute(query)
@@ -101,15 +101,15 @@ def sendEmail(masterList):
     current_day = datetime.date.today()
     formatted_date = datetime.date.strftime(current_day, "%m/%d/%Y")
     date = formatted_date.replace('/','-')
-    email = 'ARDepartment@3mpromote.com'
-    server = smtplib.SMTP(host='smtp.taylorcorp.com',port=25)
+    email = 'REDACTED'
+    server = smtplib.SMTP(REDACTED)
     pb1 = '\n'
     pb2 = '\n' + '\n'
     #formatted email body that goes out
     body1 = 'Thank you for your order and we appreciate your business!'+pb2+'We have not received prepayment for your order(PO#'
-    body2 = '). Please call 888-205-8995 with the prepayment information indicating your method of payment. Upon receiving the prepayment, we will release the credit hold and proceed with your order.'+pb2
-    body3 = 'Please respond promptly so that we can prevent any unnecessary delays to your order. Any questions/concerns please contact us at 888-205-8995.'+pb2
-    signature = 'Kind Regards,'+pb2+'Accounts Receivable Department'+pb1+'3M Promotional Markets'+pb1+'Precision Press, Inc.'+pb1+'2020 Lookout Drive | North Mankato, MN 56003'
+    body2 = '). Please call REDACTED with the prepayment information indicating your method of payment. Upon receiving the prepayment, we will release the credit hold and proceed with your order.'+pb2
+    body3 = 'Please respond promptly so that we can prevent any unnecessary delays to your order. Any questions/concerns please contact us at REDACTED.'+pb2
+    signature = 'Kind Regards,'+pb2+'Accounts Receivable Department'+pb1+'REDACTED'+pb1+'REDACTED'+pb1+'REDACTED'
     for item in masterList:
         #for every item that is flagged, get emails and send em out!
         if item[7] == True:
@@ -123,7 +123,7 @@ def sendEmail(masterList):
             msg = MIMEMultipart()
             msg['From'] = email
             msg['To'] = emailList
-            #msg['To'] = 'bomtvedt@3mpromote.com'
+            #msg['To'] = 'REDACTED'
             msg['Cc'] = email
             msg['Subject'] = 'Prepayment followup - PO# ' + po + ' Order# ' + str(control)
             msg.attach(MIMEText(date+pb1+'Acct #'+str(acct)+' - '+acctname+pb2+body1+po+body2+body3+signature, 'plain'))
@@ -135,7 +135,7 @@ def dateCalc():
     #function responsible for getting calculated dates
     from datetime import datetime
     now = datetime.now()
-    file = open(r'M:\AR\3M - AR Tools\AR-Issues/holidays.txt', 'r')
+    file = open(r'REDACTED', 'r')
     holidaysList = file.read()
     holidaysList = holidaysList.replace('\n','').split('|')
     file.close()
@@ -160,7 +160,7 @@ def holidayEdit(month,day,year):
     #add a date date
     #needs to be converted to a proper format when used elsewhere
     convert = year+'-'+month+'-'+day
-    f = open(r'M:\AR\3M - AR Tools\AR-Issues/holidays.txt', 'a')
+    f = open(r'REDACTED', 'a')
     f.write('|\n'+convert)
     f.close()
 
