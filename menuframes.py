@@ -98,7 +98,7 @@ class quick_frame:
                                                                      self.as400_password)
                       )
         creditPromptButton.place(relx=.67,rely=.3,anchor='center')
-        validCreditUsers = ['arburns','jlsargen','tljohnso','bomtved','sallen2']
+        validCreditUsers = [REDACTED]
         nameVar = (self.as400_username).lower()
         if nameVar not in validCreditUsers:
             creditPromptButton.configure(state='disabled')
@@ -271,9 +271,9 @@ class prog_frame:
         self.as400_password = as400_password
     #kind of clunky code that goes through each list of valid programs and valid users to be able to use those programs
     def valid_programs(self):
-        validAccountingUser = ['bomtved','jlsargen','arburns','tljohnso']
+        validAccountingUser = [REDACTED]
         accountingProg = ['Morning'+'\n'+'Reports','Prepay'+'\n'+'Estimate','AR-Issues']
-        validBillingUser = ['bomtved','jlsargen','jmeyer','tljohnso','rwendin']
+        validBillingUser = [REDACTED]
         billingProg = ['Pops'+'\n'+'Helper','Hold'+'\n'+'Helper','MissQuote'+'\n'+'Helper']
         x,y = 0.1,0.2
         validPrograms = []
