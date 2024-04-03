@@ -26,7 +26,7 @@ def login():
             #get username and password entries before attemping to login using those credentials
             as400_username = user_name_entry.get()
             as400_password = user_password_entry.get()
-            pyodbc.connect("DSN=QDSN_AS400.PP.COM",uid=as400_username,password=as400_password)
+            pyodbc.connect("REDACTED",uid=as400_username,password=as400_password)
             loginRoot.destroy()
             mainMenu()
         except Exception as e:
