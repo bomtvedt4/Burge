@@ -20,7 +20,7 @@ def finishedGoods(month,day,year,username,password,beginning,end):
     blank = []
     reports = []
     #opens a text file with each of the queries and runs them, program then opens the excel files where info is stored
-    queries = open(r'M:\Q Files\MRH\Queries/queries.txt','r')
+    queries = open(r'REDACTED/queries.txt','r')
     queries = queries.read()
     queries = queries.replace('1stcontrol',beginning)
     queries = queries.replace('lastcontrol',end)
@@ -33,7 +33,7 @@ def finishedGoods(month,day,year,username,password,beginning,end):
         ws = wb.create_sheet(query[0])
         if query[0] != 'oeday6':
             reports.append(query[0])
-        conn =  pyodbc.connect('DSN=QDSN_AS400.PP.COM',uid=username,password=password)
+        conn =  pyodbc.connect('REDACTED',uid=username,password=password)
         itransport = DatabaseTransport(conn)
         cursor = conn.cursor()
         cursor = cursor.execute(query[1])
@@ -76,9 +76,9 @@ def finishedGoods(month,day,year,username,password,beginning,end):
     print('Finished goods for control range: '+beginning+'-'+end)
     for num in numbers: 
         print(num)
-    wb.save(r'M:\Company Info\OE Daily Job Count\Report files/'+year+'/'+'Finished Goods '+month+'-'+day+'-'+year+'.xlsx')
-    os.startfile(r'M:\Company Info\OE Daily Job Count/'+year+' finished good jobs/'+year+' finished goods jobs_3m.xlsx')
-    os.startfile(r'M:\Company Info\OE Daily Job Count/'+year+' finished good jobs/'+year+' finished goods jobs_PP.xlsx')    
+    wb.save(r'REDACTED.xlsx')
+    os.startfile(r'REDACTED.xlsx')
+    os.startfile(r'REDACTED.xlsx')    
     print("Press 'p' for PP macro, 'm' for 3M macro or 'x' to return to the main menu. Close the program to exit.")
     count = 0
     return numbers
@@ -102,10 +102,10 @@ def oedaily(month,day,year,username,password):
     wb = Workbook()
     ws = wb.active
     #opens a text file with query information and runs the query, saves a running copy and permanent copy
-    oedaily2 = open(r'M:\Q Files\MRH\Queries/oedaily2.txt','r')
+    oedaily2 = open(r'REDACTED','r')
     oedaily2 = oedaily2.read()
     oedaily2 = oedaily2.replace('oedate',"'"+year+'-'+month+'-'+day+"'")
-    conn =  pyodbc.connect('DSN=QDSN_AS400.PP.COM',uid=username,password=password)
+    conn =  pyodbc.connect('REDACTED',uid=username,password=password)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     cursor = cursor.execute(oedaily2)
@@ -120,23 +120,23 @@ def oedaily(month,day,year,username,password):
             cell = ws.cell(row=currentrow,column=info+1)
             cell.value = final[info]
         currentrow = currentrow + 1
-    dir_name = "M:/Billing/queries/3M Report Exchange- 2008/Report exchange files/OE Daily - Large orders received"
+    dir_name = "REDACTED"
     test = os.listdir(dir_name)
     for item in test:
         if item.endswith('.xlsx'):
             os.remove(os.path.join(dir_name, item))
             
-    wb.save(r'M:\Billing\queries\3M Report Exchange- 2008\Report exchange files\OE Daily - Large orders received/'+year+' OEDAILY/'+year+' '+month+day+' OEdaily.xlsx')
-    wb.save(r'M:\Billing\queries\3M Report Exchange- 2008\Report exchange files\OE Daily - Large orders received/'+year+' '+month+day+' OEdaily.xlsx')
+    wb.save(r'REDACTED.xlsx')
+    wb.save(r'REDACTED.xlsx')
 #tax query also integrated into burge from a standalone
 def tax(month,day,year,username,password):
     #essentially shows new information each day to make sure all orders that should be taxed are
     print('Tax...')
     wb = Workbook()
     ws = wb.active
-    taxorder = open(r'M:\Q Files\MRH\Queries/taxorder.txt','r')
+    taxorder = open(r'REDACTED/taxorder.txt','r')
     taxorder = taxorder.read()
-    conn =  pyodbc.connect('DSN=QDSN_AS400.PP.COM',uid=username,password=password)
+    conn =  pyodbc.connect('REDACTED',uid=username,password=password)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     cursor = cursor.execute(taxorder)
@@ -151,7 +151,7 @@ def tax(month,day,year,username,password):
             cell = ws.cell(row=currentrow,column=info+1)
             cell.value = final[info]
         currentrow = currentrow + 1
-    ob = load_workbook(r'M:\Billing\queries\daily tax/previous day.xlsx')
+    ob = load_workbook(r'REDACTED/previous day.xlsx')
     osh = ob.active
     for i in range(1,osh.max_row+1):
         for j in range(1,4):
@@ -167,17 +167,17 @@ def tax(month,day,year,username,password):
         osh.cell(row=i,column=4).value = ws.cell(row=i,column=1).value
         osh.cell(row=i,column=5).value = ws.cell(row=i,column=2).value
         osh.cell(row=i,column=6).value = ws.cell(row=i,column=3).value     
-    ob.save(r'M:\Billing\queries\daily tax/previous day.xlsx')
-    os.startfile(r'M:\Billing\queries\daily tax/previous day.xlsx')
+    ob.save(r'REDACTED/previous day.xlsx')
+    os.startfile(r'REDACTED/previous day.xlsx')
 #basic query that shows any orders that are frozen, integrated into burge
 def freeze(month,day,year,username,password):
     #it is a double check for the accounting department to make sure orders frozen should be
     print('Freeze...')
     wb = Workbook()
     ws = wb.active
-    messages_f = open(r'M:\Q Files\MRH\Queries/messages_f.txt','r')
+    messages_f = open(r'REDACTED/messages_f.txt','r')
     messages_f = messages_f.read()
-    conn =  pyodbc.connect('DSN=QDSN_AS400.PP.COM',uid=username,password=password)
+    conn =  pyodbc.connect('REDACTED',uid=username,password=password)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     cursor = cursor.execute(messages_f)
@@ -193,7 +193,7 @@ def freeze(month,day,year,username,password):
             cell = ws.cell(row=currentrow,column=info+1)
             cell.value = final[info]
         currentrow = currentrow + 1
-    wb.save(r'M:\Billing\queries\AR Daily freeze messages\AR Freeze messages/Freeze.xlsx')
-    os.startfile(r'M:\Billing\queries\AR Daily freeze messages\AR Freeze messages/Freeze.xlsx')
+    wb.save(r'REDACTED/Freeze.xlsx')
+    os.startfile(r'REDACTED/Freeze.xlsx')
 
 
