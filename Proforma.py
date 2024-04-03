@@ -33,7 +33,7 @@ def query(cntrl,username,password):
     items = wb.create_sheet('Items')
     options = wb.create_sheet('Options')
     #query info
-    conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',uid=username,password=password)
+    conn = pyodbc.connect('REDACTED',uid=username,password=password)
     itransport = DatabaseTransport(conn)
     cursor = conn.cursor()
     #query one for the items and query two for the adders
@@ -149,34 +149,34 @@ def proforma(username):
     global pdf,today,email,ourPhone,ourName
     #basic business information based company division
     if bud == 1:
-        mmmaddress = 'ARDepartment@3mpromote.com'+pb+'3M Promotional Markets AR Team'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 888-205-8995'
-        logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/3mpromote.png'
+        mmmaddress = REDACTED
+        logo = r'REDACTED.png'
         logoW = 90
         logoH = 9
-        link = 'www.3m.com/promote'
-        ourPhone = '888-205-8995'
-        email = 'ARDepartment@3mpromote.com'
-        ourName = '3M Promotional Markets'
+        link = 'REDACTED'
+        ourPhone = 'REDACTED'
+        email = 'REDACTED'
+        ourName = 'REDACTED'
         currency = 'USD'
     elif bud == 9:
-        mmmaddress = 'PPARDepartment@PPress-tc.com'+pb+'Precision Press Contract by 3M'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 800-264-3349'
-        logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-        logoW = 45
-        logoH = 18
-        link = 'https://www.ppipromote.com'
-        ourPhone = '800-264-3349'
-        email = 'PPARDepartment@PPress-tc.com'
-        ourName = 'Precision Press Contract by 3M'
+        mmmaddress = REDACTED
+        logo = r'REDACTED.png'
+        logoW = 90
+        logoH = 9
+        link = 'REDACTED'
+        ourPhone = 'REDACTED'
+        email = 'REDACTED'
+        ourName = 'REDACTED'
         currency = 'CAD'
     elif bud == 10:
-        mmmaddress = 'PPARDepartment@PPress-tc.com'+pb+'Precision Press AR Team'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 800-264-3349'
-        logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-        logoW = 45
-        logoH = 18
-        link = 'https://www.ppipromote.com/itsa_notes/'
-        ourPhone = '800-264-3349'
-        email = 'PPARDepartment@PPress-tc.com'
-        ourName = 'Precision Press Promo'
+        mmmaddress = REDACTED
+        logo = r'REDACTED.png'
+        logoW = 90
+        logoH = 9
+        link = 'REDACTED'
+        ourPhone = 'REDACTED'
+        email = 'REDACTED'
+        ourName = 'REDACTED'
         currency = 'USD'
     itemstotal = 0
     optionstotal = 0
@@ -322,7 +322,7 @@ def proforma(username):
     pdf.set_title(str(control))
     pdf.set_author(ourName+' - User: '+username)
     try:
-        pdf.output(r'M:/burge/Generated Estimates/'+str(acct)+' - '+str(control)+'.pdf')
+        pdf.output(r'REDACTED/burge/Generated Estimates/'+str(acct)+' - '+str(control)+'.pdf')
         #wb.save('test.xlsx')
         #place this code back in the case you want to see how
         #numbers are placed per column
@@ -335,7 +335,7 @@ def proforma(username):
 def sendEmail(requester):
     #send an email to customer and include AM and AR
     errortest = acct
-    server = smtplib.SMTP(host='smtp.taylorcorp.com',port=25)
+    server = smtplib.SMTP(REDACTED)
     msg = MIMEMultipart()
     msg['From'] = email
     msg['To'] = requester
@@ -348,13 +348,13 @@ def sendEmail(requester):
     body3 = 'Please note your order is on hold for prepayment. '
     body4 = 'Call '+ourPhone+' with your credit card or ACH account information.'+pb+pb
     body5 = 'If you have any questions or concerns, let us know.'+pb+pb+'Kind regards,'+pb+pb
-    body6 = 'Accounts Receivable Department'+pb+ourName+pb+'Precision Press, Inc.'+pb
-    body7 = '2020 Lookout Drive | North Mankato, MN 56003'
+    body6 = 'Accounts Receivable Department'+pb+ourName+pb+'REDACTED'+pb
+    body7 = 'REDACTED'
     body = body1+body2+body3+body4+body5+body6+body7
     msg.attach(MIMEText(body, 'plain'))
     
     filename = str(acct)+' - '+str(control)+'.pdf'
-    path = r'M:\\burge\\Generated Estimates\\'
+    path = r'REDACTED\\burge\\Generated Estimates\\'
     
     with open(path+filename, 'rb') as attachment:
         part = MIMEBase("application", "octet-stream")
@@ -373,9 +373,9 @@ def build(entryGet,username,password):
     query(entryGet,username,password)
     setup()
     proforma(username)
-    os.startfile(r'M:/burge/Generated Estimates/'+str(acct)+' - '+str(control)+'.pdf')
-    output = "'M:\\burge\\Generated Estimates\\"+str(acct)+" - "+str(control)+".pdf'"
+    os.startfile(r'REDACTED/burge/Generated Estimates/'+str(acct)+' - '+str(control)+'.pdf')
+    output = "'REDACTED\\burge\\Generated Estimates\\"+str(acct)+" - "+str(control)+".pdf'"
     os.system('powershell Set-Clipboard -LiteralPath '+output)
 
-#build(str(1910721),'bomtved','bomtved')
-#sendEmail('bomtvedt@3mpromote.com')
+#build(str(1910721),'REDACTED','REDACTED')
+#sendEmail('REDACTED')
