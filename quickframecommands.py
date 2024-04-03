@@ -199,7 +199,7 @@ class invoiceGen:
                      ['REMOTE','Check'],
                      ['WIRE','Wire'],
                      ['CARD','Card']]
-            conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+            conn = pyodbc.connect('REDACTED',
                                   uid=self.as400_username,
                                   password=self.as400_password)
             itransport = DatabaseTransport(conn)
@@ -235,7 +235,7 @@ class invoiceGen:
             return final
         #function that runs a query that determines the amount of credit on account
         #applied against this invoice as well as any payments made
-        conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+        conn = pyodbc.connect('REDACTED',
                               uid=self.as400_username,
                               password=self.as400_password)
         itransport = DatabaseTransport(conn)
@@ -277,7 +277,7 @@ class invoiceGen:
     def exportCharges(self,invoiceCounter):
         #function that runs a query and calculates if there is any
         #export charges on a counter
-        conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+        conn = pyodbc.connect('REDACTED',
                               uid=self.as400_username,
                               password=self.as400_password)
         itransport = DatabaseTransport(conn)
@@ -307,7 +307,7 @@ class invoiceGen:
             #this function takes the packslip and gets box count
             #whichever address has the highest box count shows on the invoice
             #below the address shows the number of drops or ship to locations
-            conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+            conn = pyodbc.connect('REDACTED',
                                   uid=self.as400_username,
                                   password=self.as400_password)
             itransport = DatabaseTransport(conn)
@@ -334,7 +334,7 @@ class invoiceGen:
                 shipBoxCount += final[0]
             return shipBoxCount
             
-        conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+        conn = pyodbc.connect('REDACTED',
                               uid=self.as400_username,
                               password=self.as400_password)
         itransport = DatabaseTransport(conn)
@@ -393,7 +393,7 @@ class invoiceGen:
         #a function that runs a query that returns the majority of our primary
         #information, after doing some cleaning up of the info, it returns a dictionary
         #for later invoice use
-        conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+        conn = pyodbc.connect('REDACTED',
                               uid=self.as400_username,
                               password=self.as400_password)
         itransport = DatabaseTransport(conn)
@@ -497,7 +497,7 @@ class invoiceGen:
             AND OITOPTPF.ITMNTP = AINOPTPF.OITYPE
             AND AINOPTPF.INVPRT = 'Y'
             """
-            conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+            conn = pyodbc.connect('REDACTED',
                                   uid=self.as400_username,
                                   password=self.as400_password)
             itransport = DatabaseTransport(conn)
@@ -539,7 +539,7 @@ class invoiceGen:
         AND AINDTLPF.ITEMNO = OITEMSPF.ITEMNO
         AND AINDTLPF.DETPRT = 'Y'
         """
-        conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+        conn = pyodbc.connect('REDACTED',
                               uid=self.as400_username,
                               password=self.as400_password)
         itransport = DatabaseTransport(conn)
@@ -593,7 +593,7 @@ class invoiceGen:
                 AND SHPTRKPF.PSLPNBR = {int(packslip)}
 
                 """
-                conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+                conn = pyodbc.connect('REDACTED',
                                       uid=self.as400_username,
                                       password=self.as400_password)
                 cursor = conn.cursor()
@@ -696,44 +696,44 @@ class invoiceGen:
                 #each of the primary business units that would use this have unique info
                 #such as contact, currency and remit to
                 if info['bud'] == 1:
-                    mmmaddress = 'Remit to:'+pb+'3M Promotional Markets'+pb+'P.O. Box 844608'+pb+'Dallas, TX 75284-4608'+pb+'Direct: 888-205-8995'+pb+'Email: ARDepartment@3mpromote.com'
-                    logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/3mpromote.png'
+                    mmmaddress = REDACTED'
+                    logo = r'REDACTED.png'
                     logoW = 90
                     logoH = 9
-                    link = 'www.3m.com/promote'
-                    ourPhone = '888-205-8995'
-                    email = 'ARDepartment@3mpromote.com'
-                    ourName = '3M Promotional Markets'
+                    link = 'REDACTED'
+                    ourPhone = 'REDACTED'
+                    email = 'REDACTED'
+                    ourName = 'REDACTED'
                     currency = 'USD'
                 elif info['bud'] == 5:
-                    mmmaddress = 'Remit to:'+pb+'Precision Press Inc'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 800-264-3349'+pb+'Email: PPARDepartment@PPress-tc.com'
-                    logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-                    logoW = 45
-                    logoH = 18
-                    link = 'https://www.ppipromote.com'
-                    ourPhone = '800-264-3349'
-                    email = 'PPARDepartment@PPress-tc.com'
-                    ourName = 'Precision Press'
+                    mmmaddress = REDACTED'
+                    logo = r'REDACTED.png'
+                    logoW = 90
+                    logoH = 9
+                    link = 'REDACTED'
+                    ourPhone = 'REDACTED'
+                    email = 'REDACTED'
+                    ourName = 'REDACTED'
                     currency = 'USD'
                 elif info['bud'] == 9:
-                    mmmaddress = 'Remit to:'+pb+'Precision Press Contract by 3M'+pb+'P.O. Box 7410033'+pb+'Chicago, IL 60674-5033'+pb+'Direct: 800-264-3349'+pb+'Email: PPARDepartment@PPress-tc.com'
-                    logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-                    logoW = 45
-                    logoH = 18
-                    link = 'https://www.ppipromote.com'
-                    ourPhone = '800-264-3349'
-                    email = 'PPARDepartment@PPress-tc.com'
-                    ourName = 'Precision Press Contract by 3M'
+                    mmmaddress = REDACTED'
+                    logo = r'REDACTED.png'
+                    logoW = 90
+                    logoH = 9
+                    link = 'REDACTED'
+                    ourPhone = 'REDACTED'
+                    email = 'REDACTED'
+                    ourName = 'REDACTED'
                     currency = 'CAD'
                 elif info['bud'] == 10:
-                    mmmaddress = 'Remit to:'+pb+'Precision Press Inc (Promo)'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 800-264-3349'+pb+'Email: PPARDepartment@PPress-tc.com'
-                    logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-                    logoW = 45
-                    logoH = 18
-                    link = 'https://www.ppipromote.com/itsa_notes/'
-                    ourPhone = '800-264-3349'
-                    email = 'PPARDepartment@PPress-tc.com'
-                    ourName = 'Precision Press Promo'
+                    mmmaddress = REDACTED'
+                    logo = r'REDACTED.png'
+                    logoW = 90
+                    logoH = 9
+                    link = 'REDACTED'
+                    ourPhone = 'REDACTED'
+                    email = 'REDACTED'
+                    ourName = 'REDACTED'
                     currency = 'USD'
                 #all the code to setup our new page is below, lots of cells and positions
                 pdf.add_page()
@@ -913,7 +913,7 @@ class invoiceGen:
                 
                 y += 5
                 pdf.set_xy(10,y)
-                pdf.cell(110,5,'GST reported under R105453328',border=0,align='L',fill=False)
+                pdf.cell(110,5,'GST reported under REDACTED',border=0,align='L',fill=False)
                 y += 7.5
         #get credit amounts and then run the amounts function
         #now returns more infomation to customer on how payment was made
@@ -969,7 +969,7 @@ class invoiceGen:
             pdf.cell(55,5,f'{total:,.2f}'+' '+currency, border=0, align='R')
             if info['bud'] == 1 or info['bud'] == 9:
                 pdf.set_xy(0,287.5)
-                pdf.cell(0,5,"Post-it, Pop'n Jot and Scotch are trademarks of 3M.",align='C')
+                pdf.cell(0,5,"REDACTED",align='C')
         #add some more basic things    
         if len(pdf.pages) > 1:
             for i in range(0,len(pdf.pages)-1):
@@ -990,9 +990,9 @@ class invoiceGen:
         pdf.page = len(pdf.pages)
         pdf.set_title(str(self.invoice)+' - '+str(self.invoiceYear))
         pdf.set_author(ourName+' - User: '+self.as400_username)
-        pdf.output(r'M:\burge\Generated Invoices/'+str(self.invoice)+' - '+str(self.invoiceYear)+'.pdf')
-        os.startfile(r'M:\burge\Generated Invoices/'+str(self.invoice)+' - '+str(self.invoiceYear)+'.pdf')
-        output = r"'M:\burge\Generated Invoices/"+str(self.invoice)+" - "+str(self.invoiceYear)+".pdf'"
+        pdf.output(r'REDACTED\burge\Generated Invoices/'+str(self.invoice)+' - '+str(self.invoiceYear)+'.pdf')
+        os.startfile(r'REDACTED\burge\Generated Invoices/'+str(self.invoice)+' - '+str(self.invoiceYear)+'.pdf')
+        output = r"'REDACTED\burge\Generated Invoices/"+str(self.invoice)+" - "+str(self.invoiceYear)+".pdf'"
         os.system('powershell Set-Clipboard -LiteralPath '+output)
             
     def sendEmail(self,requester):
@@ -1001,7 +1001,7 @@ class invoiceGen:
         today = date.today()
         today = str(today.strftime("%m/%d/%y"))
         info = self.header()
-        server = smtplib.SMTP(host='smtp.taylorcorp.com',port=25)
+        server = smtplib.SMTP(REDACTED)
         msg = MIMEMultipart()
         msg['From'] = email
         msg['To'] = requester
@@ -1011,7 +1011,7 @@ class invoiceGen:
         body2 = 'See the attached document for your invoice with '+ourName+'.'+pb
         body5 = 'If you have any questions or concerns, please let us know.'+pb+pb+'Kind regards,'+pb+pb
         body6 = 'Accounts Receivable Department'+pb+ourName+pb+'AR Direct: '+ourPhone+pb
-        body7 = '2020 Lookout Drive | North Mankato, MN 56003'
+        body7 = 'REDACTED'
         body = body1+body2+body5+body6+body7
         msg.attach(MIMEText(body, 'plain'))
         
@@ -1031,13 +1031,13 @@ class invoiceGen:
         print('Invoice #'+str(self.invoice)+' - '+str(self.invoiceYear)+ ' sent to '+requester)
         server.quit()
 
-#invClass = invoiceGen(str(51802),str(2024),'bomtved','bomtved')
+#invClass = invoiceGen(str(51802),str(2024),'REDACTED','REDACTED')
 #invClass.buildInvoice(invClass.header())
 
 
 class CMClass(FPDF):
     def db_queries(self,credit,creditYear,as400_username,as400_password):
-        conn = pyodbc.connect('DSN=QDSN_AS400.PP.COM',
+        conn = pyodbc.connect('REDACTED',
                               uid=as400_password,
                               password=as400_username)
         itransport = DatabaseTransport(conn)
@@ -1101,44 +1101,44 @@ class CMClass(FPDF):
         info = self.db_queries(credit,creditYear,as400_username,as400_password)
         global email,ourName,ourPhone
         if info[9] == 1:
-            mmmaddress = 'From:'+pb+'3M Promotional Markets'+pb+'P.O. Box 844608'+pb+'Dallas, TX 75284-4608'+pb+'Direct: 800-255-2183'+pb+'ARDepartment@3mpromote.com'
-            logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/3mpromote.png'
+            mmmaddress = 'REDACTED'
+            logo = r'REDACTED.png'
             logoW = 90
             logoH = 9
-            link = 'www.3m.com/promote'
-            ourPhone = '800-255-2183'
-            email = 'ARDepartment@3mpromote.com'
-            ourName = '3M Promotional Markets'
+            link = 'REDACTED'
+            ourPhone = 'REDACTED'
+            email = 'REDACTED'
+            ourName = 'REDACTED'
             currency = 'USD'
         elif info[9] == 5:
-            mmmaddress = 'From:'+pb+'Precision Press Inc'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 800-264-3349'+pb+'PPARDepartment@PPress-tc.com'
-            logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-            logoW = 45
-            logoH = 18
-            link = 'https://www.ppipromote.com'
-            ourPhone = '800-264-3349'
-            email = 'PPARDepartment@PPress-tc.com'
-            ourName = 'Precision Press'
+            mmmaddress = 'REDACTED'
+            logo = r'REDACTED.png'
+            logoW = 90
+            logoH = 9
+            link = 'REDACTED'
+            ourPhone = 'REDACTED'
+            email = 'REDACTED'
+            ourName = 'REDACTED'
             currency = 'USD'
         elif info[9] == 9:
-            mmmaddress = 'From:'+pb+'Precision Press Contract by 3M'+pb+'P.O. Box 7410033'+pb+'Chicago, IL 60674-5033'+pb+'Direct: 800-264-3349'+pb+'PPARDepartment@PPress-tc.com'
-            logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-            logoW = 45
-            logoH = 18
-            link = 'https://www.ppipromote.com'
-            ourPhone = '800-264-3349'
-            email = 'PPARDepartment@PPress-tc.com'
-            ourName = 'Precision Press Contract by 3M'
+            mmmaddress = 'REDACTED'
+            logo = r'REDACTED.png'
+            logoW = 90
+            logoH = 9
+            link = 'REDACTED'
+            ourPhone = 'REDACTED'
+            email = 'REDACTED'
+            ourName = 'REDACTED'
             currency = 'CAD'
         elif info[9] == 10:
-            mmmaddress = 'From:'+pb+pb+'Precision Press Inc (Promo)'+pb+'2020 Lookout Drive'+pb+'North Mankato, MN 56003 - US'+pb+'Direct: 800-264-3349'+pb+'PPARDepartment@PPress-tc.com'
-            logo = r'M:\AR\3M - AR Tools\Proforma invoice\Logos/Precision Press Logo.jpg'
-            logoW = 45
-            logoH = 18
-            link = 'https://www.ppipromote.com/itsa_notes/'
-            ourPhone = '800-264-3349'
-            email = 'PPARDepartment@PPress-tc.com'
-            ourName = 'Precision Press Promo'
+            mmmaddress = 'REDACTED'
+            logo = r'REDACTED.png'
+            logoW = 90
+            logoH = 9
+            link = 'REDACTED'
+            ourPhone = 'REDACTED'
+            email = 'REDACTED'
+            ourName = 'REDACTED'
             currency = 'USD'
         today = datetime.today()
         today = today.strftime("%m/%d/%y")
@@ -1192,12 +1192,12 @@ For more information contact Accounts Receivables at {ourPhone}
         body2 = 'See the attached document for your credit memo with '+ourName+'.'+pb
         body5 = 'If you have any questions or concerns, please let us know.'+pb+pb+'Kind regards,'+pb+pb
         body6 = 'Accounts Receivable Department'+pb+ourName+pb+'AR Direct: '+ourPhone+pb
-        body7 = '2020 Lookout Drive | North Mankato, MN 56003'
+        body7 = 'REDACTED'
         body = body1+body2+body5+body6+body7
         msg.attach(MIMEText(body, 'plain'))
         
         filename = str(credit)+' - '+str(creditYear)+'.pdf'
-        path = r'M:\burge\Generated Credits/'
+        path = r'REDACTED\burge\Generated Credits/'
         
         with open(path+filename, 'rb') as attachment:
             part = MIMEBase("application", "octet-stream")
@@ -1213,6 +1213,6 @@ For more information contact Accounts Receivables at {ourPhone}
         server.quit()
 
 #pdf = CMClass()
-#pdf.buildCM(str(826),str(2024),'bomtved','bomtved')
-#pdf.sendEmail('bomtvedt@3mpromote.com',str(826),str(2024),'bomtved','bomtved')
+#pdf.buildCM(str(826),str(2024),'REDACTED','REDACTED')
+#pdf.sendEmail('REDACTED',str(826),str(2024),'REDACTED','REDACTED')
 
